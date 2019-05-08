@@ -13,6 +13,7 @@
     
 <div class="form-horizontal">
     <h4>BOOK_DATA</h4>
+    @Html.HiddenFor(model => model.BOOK_STATUS,"A")
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
@@ -63,13 +64,7 @@
         </div>
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.BOOK_STATUS, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.BOOK_STATUS, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.BOOK_STATUS, "", new { @class = "text-danger" })
-        </div>
-    </div>
+    
 
 
 
@@ -82,7 +77,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("回查詢", "Index")
 </div>
 
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>

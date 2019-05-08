@@ -13,14 +13,21 @@ namespace Net_Mvc_Workshop1.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            var books = db.BOOK_DATA.OrderBy(m => m.BOOK_ID).ToList();
-            return View(books);
+            List<SelectListItem> bookClassList = SelectBookClassList();
+            ViewBag.BOOK_CLASS_ID = bookClassList;
+            List<SelectListItem> bookKeeperList = SelectBookKeeperList();
+            ViewBag.BOOK_KEEPER = bookKeeperList;
+            List<SelectListItem> bookStatusList = SelectBookStatusList();
+            ViewBag.BOOK_STATUS = bookStatusList;
+            return View();
         }
 
         public ActionResult Create()
         {
             List<SelectListItem> bookClassList = SelectBookClassList();
             ViewBag.BOOK_CLASS_ID = bookClassList;
+            List<SelectListItem> bookStatusList = SelectBookStatusList();
+            ViewBag.BOOK_STATUS = bookStatusList;
             return View();
         }
 
@@ -61,10 +68,35 @@ namespace Net_Mvc_Workshop1.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public ActionResult Search(BOOK_DATA searchBookData)
+        {
+            var books = db.BOOK_DATA.OrderBy(m => m.BOOK_ID).ToList();
+            List<BOOK_DATA> resultBooks = new List<BOOK_DATA>();
+            if (searchBookData.BOOK_NAME == null)
+            {
+                searchBookData.BOOK_NAME = "";
+            }
+            foreach(var item in books)
+            {
+                if (item.BOOK_NAME.Contains(searchBookData.BOOK_NAME))
+                {
+                    resultBooks.Add(item);
+                }
+            }
+            return View(resultBooks);
+        }
+
         public List<SelectListItem> SelectBookClassList()
         {
             var bookClass = db.BOOK_CLASS.ToList();
             List<SelectListItem> bookClassList = new List<SelectListItem>();
+            bookClassList.Add(new SelectListItem()
+            {
+                Value = "",
+                Text = "",
+                Selected = true
+            });
             foreach (var item in bookClass)
             {
                 bookClassList.Add(new SelectListItem()
@@ -74,6 +106,48 @@ namespace Net_Mvc_Workshop1.Controllers
                 });
             }
             return bookClassList;
+        }
+
+        public List<SelectListItem> SelectBookKeeperList()
+        {
+            var member = db.MEMBER_M.ToList();
+            List<SelectListItem> memberList = new List<SelectListItem>();
+            memberList.Add(new SelectListItem()
+            {
+                Value = "",
+                Text = "",
+                Selected = true
+            });
+            foreach (var item in member)
+            {
+                memberList.Add(new SelectListItem()
+                {
+                    Value = item.USER_ID,
+                    Text = item.USER_CNAME
+                });
+            }
+            return memberList;
+        }
+
+        public List<SelectListItem> SelectBookStatusList()
+        {
+            var bookCode = db.BOOK_CODE.ToList();
+            List<SelectListItem> bookCodeList = new List<SelectListItem>();
+            bookCodeList.Add(new SelectListItem()
+            {
+                Value = "",
+                Text = "",
+                Selected = true
+            });
+            foreach (var item in bookCode)
+            {
+                bookCodeList.Add(new SelectListItem()
+                {
+                    Value = item.CODE_ID,
+                    Text = item.CODE_TYPE
+                });
+            }
+            return bookCodeList;
         }
     }
 }

@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Net_Mvc_Workshop1.Models.BOOK_DATA>
+
+@{
+    ViewBag.Title = "Search";
+}
+
+<h2>Search</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<p>
+    @Html.ActionLink("新增", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            圖書類別
+        </th>
+        <th>
+            書名
+        </th>
+        <th>
+            購書日期
+        </th>
+        <th>
+            借閱狀態
+        </th>
+        <th>
+            借閱人
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BOOK_CLASS.BOOK_CLASS_NAME)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BOOK_NAME)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BOOK_BOUGHT_DATE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BOOK_STATUS)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MEMBER_M.USER_CNAME)
+            </td>
+            <td>
+                @Html.ActionLink("編輯", "Edit", new { BOOK_ID = item.BOOK_ID }) |
+                @Html.ActionLink("刪除", "Delete", new { BOOK_ID = item.BOOK_ID })
+            </td>
+        </tr>
+    }
+
+
+</table>

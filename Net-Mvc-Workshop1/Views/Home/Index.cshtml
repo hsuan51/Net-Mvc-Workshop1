@@ -1,57 +1,64 @@
-﻿@model IEnumerable<Net_Mvc_Workshop1.Models.BOOK_DATA>
+﻿@model Net_Mvc_Workshop1.Models.BOOK_DATA
 
 @{
-    ViewBag.Title = "Index";
+    /**/
+
+    ViewBag.Title = "圖書維護";
 }
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("新增", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            圖書類別
-        </th>
-        <th>
-            書名
-        </th>
-        <th>
-            購書日期
-        </th>
-        <th>
-            借閱狀態
-        </th>
-        <th>
-            借閱人
-        </th>
-        
-        <th></th>
-    </tr>
+@using (Html.BeginForm("Search", "Home"))
+{
+    <table class="table">
+        <tr>
+            <th>
+                書名
+            </th>
+            <td>
+                @Html.EditorFor(model => model.BOOK_NAME, new { htmlAttributes = new { @class = "form-control" } })
+            </td>
+        </tr>
+        <tr>
+            <th>
+                圖書類別
+            </th>
+            <td>
+                @Html.DropDownList("BOOK_CLASS_ID", null, htmlAttributes: new { @class = "form-control" })
+            </td>
+        </tr>
+        <tr>
+            <th>
+                借閱人
+            </th>
+            <td>
+                @Html.DropDownList("BOOK_KEEPER", null, htmlAttributes: new { @class = "form-control" })
+            </td>
+        </tr>
+        <tr>
+            <th>
+                借閱狀態
+            </th>
+            <td>
+                @Html.DropDownList("BOOK_STATUS", null, htmlAttributes: new { @class = "form-control" })
+            </td>
+        </tr>
+        <tr>
+            <th>
+            </th>
+            <td>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="查詢" class="btn btn-default" />
+                        <input type="reset" value="清除" class="btn btn-default" />
+                        @Html.ActionLink("新增", "Create", new { @class = "btn btn-default" })
+                    </div>
+                </div>
+            </td>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.BOOK_CLASS.BOOK_CLASS_NAME)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BOOK_NAME)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BOOK_BOUGHT_DATE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BOOK_STATUS)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MEMBER_M.USER_CNAME)
-        </td>
-        <td>
-            @Html.ActionLink("編輯", "Edit", new { BOOK_ID = item.BOOK_ID }) |
-            @Html.ActionLink("刪除", "Delete", new { BOOK_ID = item.BOOK_ID })
-        </td>
-    </tr>
+
+
+    </table>
+    
 }
-
-</table>
