@@ -1,0 +1,271 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="dbBookModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BOOK_CLASS">
+          <Key>
+            <PropertyRef Name="BOOK_CLASS_ID" />
+          </Key>
+          <Property Name="BOOK_CLASS_ID" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="BOOK_CLASS_NAME" Type="nvarchar" MaxLength="120" Nullable="false" />
+          <Property Name="CREATE_DATE" Type="datetime" />
+          <Property Name="CREATE_USER" Type="nvarchar" MaxLength="24" />
+          <Property Name="MODIFY_DATE" Type="datetime" />
+          <Property Name="MODIFY_USER" Type="nvarchar" MaxLength="24" />
+        </EntityType>
+        <EntityType Name="BOOK_CODE">
+          <Key>
+            <PropertyRef Name="CODE_TYPE" />
+          </Key>
+          <Property Name="CODE_TYPE" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CODE_ID" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="CODE_TYPE_DESC" Type="nvarchar" MaxLength="400" />
+          <Property Name="CODE_NAME" Type="nvarchar" MaxLength="400" />
+          <Property Name="CREATE_DATE" Type="datetime" />
+          <Property Name="CREATE_USER" Type="nvarchar" MaxLength="20" />
+          <Property Name="MODIFY_DATE" Type="datetime" />
+          <Property Name="MODIFY_USER" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="BOOK_DATA">
+          <Key>
+            <PropertyRef Name="BOOK_ID" />
+          </Key>
+          <Property Name="BOOK_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BOOK_NAME" Type="nvarchar" MaxLength="400" Nullable="false" />
+          <Property Name="BOOK_CLASS_ID" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="BOOK_AUTHOR" Type="nvarchar" MaxLength="60" />
+          <Property Name="BOOK_BOUGHT_DATE" Type="datetime" />
+          <Property Name="BOOK_PUBLISHER" Type="nvarchar" MaxLength="40" />
+          <Property Name="BOOK_NOTE" Type="nvarchar" MaxLength="2400" />
+          <Property Name="BOOK_STATUS" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="BOOK_KEEPER" Type="nvarchar" MaxLength="24" />
+          <Property Name="CREATE_DATE" Type="datetime" />
+          <Property Name="CREATE_USER" Type="nvarchar" MaxLength="24" />
+          <Property Name="MODIFY_DATE" Type="datetime" />
+          <Property Name="MODIFY_USER" Type="nvarchar" MaxLength="24" />
+        </EntityType>
+        <EntityType Name="MEMBER_M">
+          <Key>
+            <PropertyRef Name="USER_ID" />
+          </Key>
+          <Property Name="USER_ID" Type="nvarchar" MaxLength="24" Nullable="false" />
+          <Property Name="USER_CNAME" Type="nvarchar" MaxLength="100" />
+          <Property Name="USER_ENAME" Type="nvarchar" MaxLength="100" />
+          <Property Name="CREATE_DATE" Type="datetime" />
+          <Property Name="CREATE_USER" Type="nvarchar" MaxLength="24" />
+          <Property Name="MODIFY_DATE" Type="datetime" />
+          <Property Name="MODIFY_USER" Type="nvarchar" MaxLength="24" />
+        </EntityType>
+        <Association Name="FK_BOOK_DATA_BOOK_CLASS">
+          <End Role="BOOK_CLASS" Type="Self.BOOK_CLASS" Multiplicity="1" />
+          <End Role="BOOK_DATA" Type="Self.BOOK_DATA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BOOK_CLASS">
+              <PropertyRef Name="BOOK_CLASS_ID" />
+            </Principal>
+            <Dependent Role="BOOK_DATA">
+              <PropertyRef Name="BOOK_CLASS_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbBookModelStoreContainer">
+          <EntitySet Name="BOOK_CLASS" EntityType="Self.BOOK_CLASS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BOOK_CODE" EntityType="Self.BOOK_CODE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BOOK_DATA" EntityType="Self.BOOK_DATA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MEMBER_M" EntityType="Self.MEMBER_M" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BOOK_DATA_BOOK_CLASS" Association="Self.FK_BOOK_DATA_BOOK_CLASS">
+            <End Role="BOOK_CLASS" EntitySet="BOOK_CLASS" />
+            <End Role="BOOK_DATA" EntitySet="BOOK_DATA" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbBookModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BOOK_CLASS">
+          <Key>
+            <PropertyRef Name="BOOK_CLASS_ID" />
+          </Key>
+          <Property Name="BOOK_CLASS_ID" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BOOK_CLASS_NAME" Type="String" MaxLength="120" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CREATE_DATE" Type="DateTime" Precision="3" />
+          <Property Name="CREATE_USER" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+          <Property Name="MODIFY_DATE" Type="DateTime" Precision="3" />
+          <Property Name="MODIFY_USER" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BOOK_DATA" Relationship="Self.FK_BOOK_DATA_BOOK_CLASS" FromRole="BOOK_CLASS" ToRole="BOOK_DATA" />
+        </EntityType>
+        <EntityType Name="BOOK_CODE">
+          <Key>
+            <PropertyRef Name="CODE_TYPE" />
+          </Key>
+          <Property Name="CODE_TYPE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CODE_ID" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="CODE_TYPE_DESC" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="CODE_NAME" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="CREATE_DATE" Type="DateTime" Precision="3" />
+          <Property Name="CREATE_USER" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="MODIFY_DATE" Type="DateTime" Precision="3" />
+          <Property Name="MODIFY_USER" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="BOOK_DATA">
+          <Key>
+            <PropertyRef Name="BOOK_ID" />
+          </Key>
+          <Property Name="BOOK_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BOOK_NAME" Type="String" MaxLength="400" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BOOK_CLASS_ID" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BOOK_AUTHOR" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="BOOK_BOUGHT_DATE" Type="DateTime" Precision="3" />
+          <Property Name="BOOK_PUBLISHER" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="BOOK_NOTE" Type="String" MaxLength="2400" FixedLength="false" Unicode="true" />
+          <Property Name="BOOK_STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="BOOK_KEEPER" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+          <Property Name="CREATE_DATE" Type="DateTime" Precision="3" />
+          <Property Name="CREATE_USER" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+          <Property Name="MODIFY_DATE" Type="DateTime" Precision="3" />
+          <Property Name="MODIFY_USER" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BOOK_CLASS" Relationship="Self.FK_BOOK_DATA_BOOK_CLASS" FromRole="BOOK_DATA" ToRole="BOOK_CLASS" />
+          <NavigationProperty Name="MEMBER_M" Relationship="Self.FK_BOOK_DATA_MEMBER_M" FromRole="BOOK_DATA" ToRole="MEMBER_M" />
+        </EntityType>
+        <EntityType Name="MEMBER_M">
+          <Key>
+            <PropertyRef Name="USER_ID" />
+          </Key>
+          <Property Name="USER_ID" Type="String" MaxLength="24" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="USER_CNAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="USER_ENAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CREATE_DATE" Type="DateTime" Precision="3" />
+          <Property Name="CREATE_USER" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+          <Property Name="MODIFY_DATE" Type="DateTime" Precision="3" />
+          <Property Name="MODIFY_USER" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BOOK_DATA" Relationship="Self.FK_BOOK_DATA_MEMBER_M" FromRole="MEMBER_M" ToRole="BOOK_DATA" />
+        </EntityType>
+        <Association Name="FK_BOOK_DATA_BOOK_CLASS">
+          <End Role="BOOK_CLASS" Type="Self.BOOK_CLASS" Multiplicity="1" />
+          <End Role="BOOK_DATA" Type="Self.BOOK_DATA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BOOK_CLASS">
+              <PropertyRef Name="BOOK_CLASS_ID" />
+            </Principal>
+            <Dependent Role="BOOK_DATA">
+              <PropertyRef Name="BOOK_CLASS_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BOOK_DATA_MEMBER_M">
+          <End Role="MEMBER_M" Type="Self.MEMBER_M" Multiplicity="0..1" />
+          <End Role="BOOK_DATA" Type="Self.BOOK_DATA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MEMBER_M">
+              <PropertyRef Name="USER_ID" />
+            </Principal>
+            <Dependent Role="BOOK_DATA">
+              <PropertyRef Name="BOOK_KEEPER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbBookEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BOOK_CLASS" EntityType="Self.BOOK_CLASS" />
+          <EntitySet Name="BOOK_CODE" EntityType="Self.BOOK_CODE" />
+          <EntitySet Name="BOOK_DATA" EntityType="Self.BOOK_DATA" />
+          <EntitySet Name="MEMBER_M" EntityType="Self.MEMBER_M" />
+          <AssociationSet Name="FK_BOOK_DATA_BOOK_CLASS" Association="Self.FK_BOOK_DATA_BOOK_CLASS">
+            <End Role="BOOK_CLASS" EntitySet="BOOK_CLASS" />
+            <End Role="BOOK_DATA" EntitySet="BOOK_DATA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BOOK_DATA_MEMBER_M" Association="Self.FK_BOOK_DATA_MEMBER_M">
+            <End Role="MEMBER_M" EntitySet="MEMBER_M" />
+            <End Role="BOOK_DATA" EntitySet="BOOK_DATA" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbBookModelStoreContainer" CdmEntityContainer="dbBookEntities">
+          <EntitySetMapping Name="BOOK_CLASS">
+            <EntityTypeMapping TypeName="dbBookModel.BOOK_CLASS">
+              <MappingFragment StoreEntitySet="BOOK_CLASS">
+                <ScalarProperty Name="BOOK_CLASS_ID" ColumnName="BOOK_CLASS_ID" />
+                <ScalarProperty Name="BOOK_CLASS_NAME" ColumnName="BOOK_CLASS_NAME" />
+                <ScalarProperty Name="CREATE_DATE" ColumnName="CREATE_DATE" />
+                <ScalarProperty Name="CREATE_USER" ColumnName="CREATE_USER" />
+                <ScalarProperty Name="MODIFY_DATE" ColumnName="MODIFY_DATE" />
+                <ScalarProperty Name="MODIFY_USER" ColumnName="MODIFY_USER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BOOK_CODE">
+            <EntityTypeMapping TypeName="dbBookModel.BOOK_CODE">
+              <MappingFragment StoreEntitySet="BOOK_CODE">
+                <ScalarProperty Name="CODE_TYPE" ColumnName="CODE_TYPE" />
+                <ScalarProperty Name="CODE_ID" ColumnName="CODE_ID" />
+                <ScalarProperty Name="CODE_TYPE_DESC" ColumnName="CODE_TYPE_DESC" />
+                <ScalarProperty Name="CODE_NAME" ColumnName="CODE_NAME" />
+                <ScalarProperty Name="CREATE_DATE" ColumnName="CREATE_DATE" />
+                <ScalarProperty Name="CREATE_USER" ColumnName="CREATE_USER" />
+                <ScalarProperty Name="MODIFY_DATE" ColumnName="MODIFY_DATE" />
+                <ScalarProperty Name="MODIFY_USER" ColumnName="MODIFY_USER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BOOK_DATA">
+            <EntityTypeMapping TypeName="dbBookModel.BOOK_DATA">
+              <MappingFragment StoreEntitySet="BOOK_DATA">
+                <ScalarProperty Name="BOOK_ID" ColumnName="BOOK_ID" />
+                <ScalarProperty Name="BOOK_NAME" ColumnName="BOOK_NAME" />
+                <ScalarProperty Name="BOOK_CLASS_ID" ColumnName="BOOK_CLASS_ID" />
+                <ScalarProperty Name="BOOK_AUTHOR" ColumnName="BOOK_AUTHOR" />
+                <ScalarProperty Name="BOOK_BOUGHT_DATE" ColumnName="BOOK_BOUGHT_DATE" />
+                <ScalarProperty Name="BOOK_PUBLISHER" ColumnName="BOOK_PUBLISHER" />
+                <ScalarProperty Name="BOOK_NOTE" ColumnName="BOOK_NOTE" />
+                <ScalarProperty Name="BOOK_STATUS" ColumnName="BOOK_STATUS" />
+                <ScalarProperty Name="BOOK_KEEPER" ColumnName="BOOK_KEEPER" />
+                <ScalarProperty Name="CREATE_DATE" ColumnName="CREATE_DATE" />
+                <ScalarProperty Name="CREATE_USER" ColumnName="CREATE_USER" />
+                <ScalarProperty Name="MODIFY_DATE" ColumnName="MODIFY_DATE" />
+                <ScalarProperty Name="MODIFY_USER" ColumnName="MODIFY_USER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MEMBER_M">
+            <EntityTypeMapping TypeName="dbBookModel.MEMBER_M">
+              <MappingFragment StoreEntitySet="MEMBER_M">
+                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+                <ScalarProperty Name="USER_CNAME" ColumnName="USER_CNAME" />
+                <ScalarProperty Name="USER_ENAME" ColumnName="USER_ENAME" />
+                <ScalarProperty Name="CREATE_DATE" ColumnName="CREATE_DATE" />
+                <ScalarProperty Name="CREATE_USER" ColumnName="CREATE_USER" />
+                <ScalarProperty Name="MODIFY_DATE" ColumnName="MODIFY_DATE" />
+                <ScalarProperty Name="MODIFY_USER" ColumnName="MODIFY_USER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="無" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
