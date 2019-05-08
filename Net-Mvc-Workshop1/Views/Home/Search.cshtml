@@ -53,7 +53,7 @@
             </td>
             <td>
                 @Html.ActionLink("編輯", "Edit", new { BOOK_ID = item.BOOK_ID }) |
-                @Html.ActionLink("刪除", "Delete", new { BOOK_ID = item.BOOK_ID })
+                @Html.ActionLink("刪除", "Delete", new { BOOK_ID = item.BOOK_ID }, new { onclick = "return confirm('確定刪除此書籍？')" })
             </td>
         </tr>
     }

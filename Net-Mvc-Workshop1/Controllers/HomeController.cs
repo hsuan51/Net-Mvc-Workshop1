@@ -19,6 +19,18 @@ namespace Net_Mvc_Workshop1.Controllers
             ViewBag.BOOK_KEEPER = bookKeeperList;
             List<SelectListItem> bookStatusList = SelectBookStatusList();
             ViewBag.BOOK_STATUS = bookStatusList;
+            bookStatusList.Add(new SelectListItem()
+            {
+                Value = "",
+                Text = "",
+                Selected = true
+            });
+            bookClassList.Add(new SelectListItem()
+            {
+                Value = "",
+                Text = "",
+                Selected = true
+            });
             return View();
         }
 
@@ -53,6 +65,10 @@ namespace Net_Mvc_Workshop1.Controllers
             var book = db.BOOK_DATA.Where(m => m.BOOK_ID == BOOK_ID).FirstOrDefault();
             List<SelectListItem> bookClassList = SelectBookClassList();
             ViewBag.BOOK_CLASS_ID = bookClassList;
+            List<SelectListItem> bookStatusList = SelectBookStatusList();
+            ViewBag.BOOK_STATUS = bookStatusList;
+            List<SelectListItem> bookKeeperList = SelectBookKeeperList();
+            ViewBag.BOOK_KEEPER = bookKeeperList;
             return View(book);
         }
 
@@ -63,7 +79,19 @@ namespace Net_Mvc_Workshop1.Controllers
             var book = db.BOOK_DATA.Where(m => m.BOOK_ID == BOOK_ID).FirstOrDefault();
             book.BOOK_NAME = bookData.BOOK_NAME;
             book.BOOK_CLASS_ID = bookData.BOOK_CLASS_ID;
+            book.BOOK_AUTHOR = bookData.BOOK_AUTHOR;
+            book.BOOK_PUBLISHER = bookData.BOOK_PUBLISHER;
+            book.BOOK_NOTE = bookData.BOOK_NOTE;
+            book.BOOK_BOUGHT_DATE = bookData.BOOK_BOUGHT_DATE;
             book.BOOK_STATUS = bookData.BOOK_STATUS;
+            if(bookData.BOOK_KEEPER == null)
+            {
+                book.BOOK_KEEPER = "";
+            }
+            else
+            {
+                book.BOOK_KEEPER = bookData.BOOK_KEEPER;
+            }
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -103,12 +131,6 @@ namespace Net_Mvc_Workshop1.Controllers
         {
             var bookClass = db.BOOK_CLASS.ToList();
             List<SelectListItem> bookClassList = new List<SelectListItem>();
-            bookClassList.Add(new SelectListItem()
-            {
-                Value = "",
-                Text = "",
-                Selected = true
-            });
             foreach (var item in bookClass)
             {
                 bookClassList.Add(new SelectListItem()
@@ -145,12 +167,6 @@ namespace Net_Mvc_Workshop1.Controllers
         {
             var bookCode = db.BOOK_CODE.ToList();
             List<SelectListItem> bookCodeList = new List<SelectListItem>();
-            bookCodeList.Add(new SelectListItem()
-            {
-                Value = "",
-                Text = "",
-                Selected = true
-            });
             foreach (var item in bookCode)
             {
                 bookCodeList.Add(new SelectListItem()
