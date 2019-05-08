@@ -4,10 +4,10 @@
     ViewBag.Title = "Search";
 }
 
-<h2>Search</h2>
+<h2>查詢結果</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("回查詢", "Index", new { @class = "btn btn-default" })
 </p>
 <p>
     @Html.ActionLink("新增", "Create")
@@ -57,6 +57,7 @@
             </td>
         </tr>
     }
+    
 
 
 </table>

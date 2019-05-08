@@ -77,9 +77,21 @@ namespace Net_Mvc_Workshop1.Controllers
             {
                 searchBookData.BOOK_NAME = "";
             }
-            foreach(var item in books)
+            if (searchBookData.BOOK_CLASS_ID == null)
             {
-                if (item.BOOK_NAME.Contains(searchBookData.BOOK_NAME))
+                searchBookData.BOOK_CLASS_ID = "";
+            }
+            if (searchBookData.BOOK_KEEPER == null)
+            {
+                searchBookData.BOOK_KEEPER = "";
+            }
+            if (searchBookData.BOOK_STATUS == null)
+            {
+                searchBookData.BOOK_STATUS = "";
+            }
+            foreach (var item in books)
+            {
+                if (item.BOOK_NAME.Contains(searchBookData.BOOK_NAME) && item.BOOK_CLASS_ID.Contains(searchBookData.BOOK_CLASS_ID) && item.BOOK_KEEPER.Contains(searchBookData.BOOK_KEEPER) && item.BOOK_STATUS.Contains(searchBookData.BOOK_STATUS))
                 {
                     resultBooks.Add(item);
                 }
