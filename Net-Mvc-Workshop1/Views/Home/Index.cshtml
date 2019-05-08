@@ -7,90 +7,48 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("新增", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.BOOK_NAME)
+            圖書類別
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.BOOK_AUTHOR)
+            書名
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.BOOK_BOUGHT_DATE)
+            購書日期
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.BOOK_PUBLISHER)
+            借閱狀態
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.BOOK_NOTE)
+            借閱人
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BOOK_STATUS)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CREATE_DATE)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CREATE_USER)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MODIFY_DATE)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MODIFY_USER)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BOOK_CLASS.BOOK_CLASS_NAME)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MEMBER_M.USER_CNAME)
-        </th>
+        
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.BOOK_NAME)
+            @Html.DisplayFor(modelItem => item.BOOK_CLASS.BOOK_CLASS_NAME)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.BOOK_AUTHOR)
+            @Html.DisplayFor(modelItem => item.BOOK_NAME)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.BOOK_BOUGHT_DATE)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.BOOK_PUBLISHER)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BOOK_NOTE)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.BOOK_STATUS)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CREATE_DATE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CREATE_USER)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MODIFY_DATE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MODIFY_USER)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BOOK_CLASS.BOOK_CLASS_NAME)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.MEMBER_M.USER_CNAME)
         </td>
         <td>
             @Html.ActionLink("編輯", "Edit", new { BOOK_ID = item.BOOK_ID }) |
-            @Html.ActionLink("Details", "Details", new { BOOK_ID = item.BOOK_ID }) |
             @Html.ActionLink("刪除", "Delete", new { BOOK_ID = item.BOOK_ID })
         </td>
     </tr>

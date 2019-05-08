@@ -27,6 +27,7 @@ namespace Net_Mvc_Workshop1.Controllers
         [HttpPost]
         public ActionResult Create(BOOK_DATA bookData)
         {
+            bookData.BOOK_STATUS = "A";
             db.BOOK_DATA.Add(bookData);
             db.SaveChanges();
             return RedirectToAction("Index");
