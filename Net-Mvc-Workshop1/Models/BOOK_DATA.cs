@@ -14,6 +14,12 @@ namespace Net_Mvc_Workshop1.Models
     
     public partial class BOOK_DATA
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public BOOK_DATA()
+        {
+            this.BOOK_KEEPER = "";
+        }
+    
         public int BOOK_ID { get; set; }
         public string BOOK_NAME { get; set; }
         public string BOOK_CLASS_ID { get; set; }

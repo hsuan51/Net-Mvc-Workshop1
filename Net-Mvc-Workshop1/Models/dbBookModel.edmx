@@ -122,7 +122,7 @@
           <Property Name="BOOK_PUBLISHER" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
           <Property Name="BOOK_NOTE" Type="String" MaxLength="2400" FixedLength="false" Unicode="true" />
           <Property Name="BOOK_STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="BOOK_KEEPER" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+          <Property Name="BOOK_KEEPER" Type="String" MaxLength="24" FixedLength="false" Unicode="true" DefaultValue="" />
           <Property Name="CREATE_DATE" Type="DateTime" Precision="3" />
           <Property Name="CREATE_USER" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
           <Property Name="MODIFY_DATE" Type="DateTime" Precision="3" />
