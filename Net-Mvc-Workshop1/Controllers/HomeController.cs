@@ -19,13 +19,13 @@ namespace Net_Mvc_Workshop1.Controllers
             ViewBag.BOOK_KEEPER = bookKeeperList;
             List<SelectListItem> bookStatusList = SelectBookStatusList();
             ViewBag.BOOK_STATUS = bookStatusList;
-            bookStatusList.Add(new SelectListItem()
+            bookStatusList.Insert(0,new SelectListItem() //加入一筆空值
             {
                 Value = "",
                 Text = "",
                 Selected = true
             });
-            bookClassList.Add(new SelectListItem()
+            bookClassList.Insert(0,new SelectListItem()  //加入一筆空值
             {
                 Value = "",
                 Text = "",
@@ -127,7 +127,7 @@ namespace Net_Mvc_Workshop1.Controllers
             return View(resultBooks);
         }
 
-        public List<SelectListItem> SelectBookClassList()
+        public List<SelectListItem> SelectBookClassList()  //將BOOK_CLASS置換成中文
         {
             var bookClass = db.BOOK_CLASS.ToList();
             List<SelectListItem> bookClassList = new List<SelectListItem>();
@@ -142,7 +142,7 @@ namespace Net_Mvc_Workshop1.Controllers
             return bookClassList;
         }
 
-        public List<SelectListItem> SelectBookKeeperList()
+        public List<SelectListItem> SelectBookKeeperList()  //將BOOK_KEEPER置換成中文
         {
             var member = db.MEMBER_M.ToList();
             List<SelectListItem> memberList = new List<SelectListItem>();
@@ -163,7 +163,7 @@ namespace Net_Mvc_Workshop1.Controllers
             return memberList;
         }
 
-        public List<SelectListItem> SelectBookStatusList()
+        public List<SelectListItem> SelectBookStatusList()  //將BOOK_STATUS置換成中文
         {
             var bookCode = db.BOOK_CODE.ToList();
             List<SelectListItem> bookCodeList = new List<SelectListItem>();

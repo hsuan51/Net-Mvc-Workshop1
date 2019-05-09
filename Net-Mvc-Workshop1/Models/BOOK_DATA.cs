@@ -19,7 +19,6 @@ namespace Net_Mvc_Workshop1.Models
         {
             this.BOOK_KEEPER = "";
         }
-    
         public int BOOK_ID { get; set; }
         public string BOOK_NAME { get; set; }
         public string BOOK_CLASS_ID { get; set; }
@@ -36,5 +35,6 @@ namespace Net_Mvc_Workshop1.Models
     
         public virtual BOOK_CLASS BOOK_CLASS { get; set; }
         public virtual MEMBER_M MEMBER_M { get; set; }
+        public virtual BOOK_CODE BOOK_CODE { get; set; }
     }
 }
