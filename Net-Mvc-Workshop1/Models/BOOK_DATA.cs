@@ -11,7 +11,8 @@ namespace Net_Mvc_Workshop1.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class BOOK_DATA
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,12 +21,15 @@ namespace Net_Mvc_Workshop1.Models
             this.BOOK_KEEPER = "";
         }
         public int BOOK_ID { get; set; }
+        [Required(ErrorMessage = "必填")]
         public string BOOK_NAME { get; set; }
+        [Required(ErrorMessage = "必填")]
         public string BOOK_CLASS_ID { get; set; }
         public string BOOK_AUTHOR { get; set; }
         public Nullable<System.DateTime> BOOK_BOUGHT_DATE { get; set; }
         public string BOOK_PUBLISHER { get; set; }
         public string BOOK_NOTE { get; set; }
+        [Required(ErrorMessage = "必填")]
         public string BOOK_STATUS { get; set; }
         public string BOOK_KEEPER { get; set; }
         public Nullable<System.DateTime> CREATE_DATE { get; set; }
