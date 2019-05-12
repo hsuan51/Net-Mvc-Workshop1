@@ -25,9 +25,14 @@ namespace Net_Mvc_Workshop1.Models
         public string BOOK_NAME { get; set; }
         [Required(ErrorMessage = "必填")]
         public string BOOK_CLASS_ID { get; set; }
+        [Required(ErrorMessage = "必填")]
         public string BOOK_AUTHOR { get; set; }
+        [Required(ErrorMessage = "必填")]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> BOOK_BOUGHT_DATE { get; set; }
+        [Required(ErrorMessage = "必填")]
         public string BOOK_PUBLISHER { get; set; }
+        [Required(ErrorMessage = "必填")]
         public string BOOK_NOTE { get; set; }
         [Required(ErrorMessage = "必填")]
         public string BOOK_STATUS { get; set; }

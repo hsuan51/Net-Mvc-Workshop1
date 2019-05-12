@@ -99,7 +99,7 @@ namespace Net_Mvc_Workshop1.Controllers
         [HttpPost]
         public ActionResult Search(BOOK_DATA searchBookData)
         {
-            var books = db.BOOK_DATA.OrderBy(m => m.BOOK_ID).ToList();
+            var books = db.BOOK_DATA.OrderByDescending(m=>m.BOOK_BOUGHT_DATE).ToList();
             List<BOOK_DATA> resultBooks = new List<BOOK_DATA>();
             if (searchBookData.BOOK_NAME == null)
             {
